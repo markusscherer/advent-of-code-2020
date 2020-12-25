@@ -10,12 +10,6 @@ hits :: [[Char]] -> Int -> Int
 hits [] i = 0
 hits (t : ts) i = hit t i + hits ts (i + 3)
 
--- solution 1
---main = do
---  contents <- getContents
---  let terrain = lines contents
---  putStr $ show $ hits terrain 0
-
 simulate :: [[Char]] -> (Int, Int) -> State (Int, Int, Int) Int
 simulate t (dx, dy) = do
   (x, y, c) <- get
@@ -29,6 +23,5 @@ simulate t (dx, dy) = do
 main = do
   contents <- getContents
   let terrain = lines contents
-  --  let h = length terrain
-  --  let w = length $ head terrain
-  putStr $ show $ product $ map (\x -> evalState (simulate terrain x) (0, 0, 0)) [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
+  print $ hits terrain 0
+  print $ product $ map (\x -> evalState (simulate terrain x) (0, 0, 0)) [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
